@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Crypto Prediction Tool</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Header with Refresh Button -->
+        <header class="dashboard-header">
+            <div class="container">
+                <div class="header-top">
+                    <h1>🏦 Professional Cryptocurrency Prediction Tool</h1>
+                    <div class="header-controls">
+                        <div class="last-updated">
+                            <span class="label">Last Updated:</span>
+                            <span class="timestamp" id="lastUpdated">September 21, 2025, 10:30 AM</span>
+                        </div>
+                        <button class="refresh-btn" id="refreshBtn" onclick="refreshAllData()">
+                            <i class="fas fa-sync-alt" id="refreshIcon"></i>
+                            <span>Refresh Data</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="market-overview">
+                    <div class="market-stat">
+                        <span class="label">Total Market Cap:</span>
+                        <span class="value" id="totalMarketCap">$4.15T</span>
+                        <span class="change positive" id="marketCapChange">+2.4%</span>
+                    </div>
+                    <div class="market-stat">
+                        <span class="label">Bitcoin Dominance:</span>
+                        <span class="value" id="btcDominance">56.7%</span>
+                        <span class="change negative" id="btcDomChange">-0.3%</span>
+                    </div>
+                    <div class="market-stat">
+                        <span class="label">Fear & Greed:</span>
+                        <span class="value success" id="fearGreedIndex">72 (Greed)</span>
+                    </div>
+                    <div class="market-stat">
+                        <span class="label">Altcoin Season:</span>
+                        <span class="value warning" id="altcoinIndex">75.2</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Loading Overlay -->
+        <div class="loading-overlay" id="loadingOverlay">
+            <div class="loading-content">
+                <div class="loading-spinner"></div>
+                <p>Refreshing cryptocurrency data...</p>
+                <small>Fetching latest prices and market data</small>
+            </div>
+        </div>
+
+        <!-- Filters Section -->
+        <section class="filters-section">
+            <div class="container">
+                <div class="filters-grid">
+                    <div class="filter-group">
+                        <label class="form-label">Risk Level</label>
+                        <select class="form-control" id="riskFilter">
+                            <option value="all">All Risk Levels</option>
+                            <option value="Low">Low Risk</option>
+                            <option value="Low-Medium">Low-Medium Risk</option>
+                            <option value="Medium">Medium Risk</option>
+                            <option value="High">High Risk</option>
+                            <option value="Very High">Very High Risk</option>
+                            <option value="Extreme">Extreme Risk</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label class="form-label">Potential Gain</label>
+                        <select class="form-control" id="gainFilter">
+                            <option value="all">All Gains</option>
+                            <option value="low">< 50%</option>
+                            <option value="medium">50% - 200%</option>
+                            <option value="high">200% - 500%</option>
+                            <option value="extreme">500% - 1000%</option>
+                            <option value="moonshot">1000%+</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label class="form-label">Probability</label>
+                        <select class="form-control" id="probabilityFilter">
+                            <option value="all">All Probabilities</option>
+                            <option value="high">70%+</option>
+                            <option value="medium">50% - 70%</option>
+                            <option value="low">30% - 50%</option>
+                            <option value="verylow">< 30%</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label class="form-label">Sort By</label>
+                        <select class="form-control" id="sortFilter">
+                            <option value="potential_gain">Potential Gain</option>
+                            <option value="probability">Probability</option>
+                            <option value="risk_level">Risk Level</option>
+                            <option value="market_cap">Market Cap</option>
+                            <option value="fundamentals">Fundamentals</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Standard Cryptocurrencies Section -->
+        <section class="crypto-section">
+            <div class="container">
+                <h2 class="section-title">🟢 Standard Risk Cryptocurrencies</h2>
+                <div class="crypto-grid" id="standardCryptoGrid">
+                    <!-- Standard crypto cards will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Extreme Risk Section -->
+        <section class="extreme-risk-section">
+            <div class="container">
+                <div class="extreme-risk-header">
+                    <h2 class="section-title">⚠️ EXTREME RISK: Ultra-High Reward (1000%+ Potential)</h2>
+                    <div class="risk-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>HIGH PROBABILITY OF TOTAL LOSS - Only invest what you can afford to lose completely</span>
+                    </div>
+                </div>
+                <div class="crypto-grid extreme-risk-grid" id="extremeRiskGrid">
+                    <!-- Extreme risk crypto cards will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="dashboard-footer">
+            <div class="container">
+                <div class="footer-content">
+                    <p class="disclaimer">
+                        <strong>Disclaimer:</strong> This tool is for educational purposes only. Cryptocurrency investments are extremely volatile and risky. 
+                        Past performance does not guarantee future results. Always conduct your own research and never invest more than you can afford to lose.
+                        The extreme risk section contains investments with very high probability of total loss.
+                    </p>
+                    <p class="data-sources">
+                        <strong>Data Sources:</strong> CoinGecko API, DeFiLlama, Whale Alert, Glassnode, Chainalysis, Nansen
+                    </p>
+                    <p class="last-update">
+                        Platform last refreshed: <span id="footerLastUpdate">September 21, 2025, 10:30 AM EDT</span>
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
